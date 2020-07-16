@@ -1,7 +1,9 @@
 {
   "openapi" : "3.0.1",
   "info" : {
-    "title" : "Talend Management Console Public API",
+    "title" : "Talend Management Console API",
+    "description" : "Talend Management Console Public API",
+    "contact" : { },
     "version" : "2.1"
   },
   "paths" : {
