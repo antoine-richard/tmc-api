@@ -1,0 +1,5672 @@
+{
+  "openapi" : "3.0.1",
+  "info" : {
+    "title" : "Talend Management Console Public API",
+    "version" : "2.1"
+  },
+  "paths" : {
+    "/artifacts" : {
+      "get" : {
+        "tags" : [ "artifacts" ],
+        "summary" : "Get available Artifacts",
+        "description" : "Get available Artifacts",
+        "operationId" : "getArtifactsAvailable",
+        "parameters" : [ {
+          "name" : "name",
+          "in" : "query",
+          "description" : "artifact name filter",
+          "schema" : {
+            "type" : "string",
+            "description" : "artifact name filter"
+          }
+        }, {
+          "name" : "workspaceId",
+          "in" : "query",
+          "description" : "workspace id",
+          "schema" : {
+            "type" : "string",
+            "description" : "workspace id"
+          }
+        }, {
+          "name" : "environmentId",
+          "in" : "query",
+          "description" : "environment id",
+          "schema" : {
+            "type" : "string",
+            "description" : "environment id"
+          }
+        }, {
+          "name" : "limit",
+          "in" : "query",
+          "description" : "the number of items to return. Must be in range [1, 100]. Default value - 100",
+          "schema" : {
+            "type" : "integer",
+            "format" : "int32",
+            "description" : "the number of items to return. Must be in range [1, 100]. Default value - 100"
+          }
+        }, {
+          "name" : "offset",
+          "in" : "query",
+          "description" : "the position of the first item. Must be greater than or equal to 0. Default value - 0",
+          "schema" : {
+            "type" : "integer",
+            "format" : "int32",
+            "description" : "the position of the first item. Must be greater than or equal to 0. Default value - 0"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Successful response",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Page"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad Request",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "Unauthorized",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403" : {
+            "description" : "Forbidden - no permissions to access resource",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not found - resource not found",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "Server error - something went wrong on server side",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "Basic Authentication" : [ ]
+        } ]
+      }
+    },
+    "/artifacts/{id}" : {
+      "get" : {
+        "tags" : [ "artifacts" ],
+        "summary" : "Get Artifact by id",
+        "description" : "Get Artifact by id",
+        "operationId" : "getArtifact",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Artifact"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad Request",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "Unauthorized",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403" : {
+            "description" : "Forbidden",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not Found",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "Internal Server Error",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "Basic Authentication" : [ ]
+        } ]
+      },
+      "parameters" : [ {
+        "name" : "id",
+        "in" : "path",
+        "required" : true,
+        "description" : "artifact id",
+        "schema" : {
+          "type" : "string",
+          "description" : "artifact id"
+        }
+      } ]
+    },
+    "/artifacts/{id}/versions/{version}" : {
+      "get" : {
+        "tags" : [ "artifacts" ],
+        "summary" : "Get Artifact of a specified version",
+        "description" : "Get Artifact of a specified version",
+        "operationId" : "getArtifactOfVersion",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ArtifactVersion"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad Request",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "Unauthorized",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403" : {
+            "description" : "Forbidden",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not Found",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "Internal Server Error",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "Basic Authentication" : [ ]
+        } ]
+      },
+      "parameters" : [ {
+        "name" : "id",
+        "in" : "path",
+        "required" : true,
+        "description" : "artifact id",
+        "schema" : {
+          "type" : "string",
+          "description" : "artifact id"
+        }
+      }, {
+        "name" : "version",
+        "in" : "path",
+        "required" : true,
+        "description" : "artifact version",
+        "schema" : {
+          "type" : "string",
+          "description" : "artifact version"
+        }
+      } ]
+    },
+    "/connections/{id}" : {
+      "get" : {
+        "tags" : [ "configuration" ],
+        "summary" : "Get Connection by id",
+        "description" : "Get Connection by id",
+        "operationId" : "getConnection",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/RunConnection"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad Request",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "Unauthorized",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403" : {
+            "description" : "Forbidden",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not Found",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "Internal Server Error",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "Basic Authentication" : [ ]
+        } ]
+      },
+      "parameters" : [ {
+        "name" : "id",
+        "in" : "path",
+        "required" : true,
+        "description" : "Connection id",
+        "schema" : {
+          "type" : "string",
+          "description" : "Connection id"
+        }
+      } ]
+    },
+    "/executables/plans" : {
+      "get" : {
+        "tags" : [ "plans :: executables" ],
+        "summary" : "Get available Plans",
+        "description" : "Get available Plans",
+        "operationId" : "getAvailablePlans",
+        "parameters" : [ {
+          "name" : "name",
+          "in" : "query",
+          "description" : "plan name filter",
+          "schema" : {
+            "type" : "string",
+            "description" : "plan name filter"
+          }
+        }, {
+          "name" : "taskId",
+          "in" : "query",
+          "description" : "task Id",
+          "schema" : {
+            "type" : "string",
+            "description" : "task Id"
+          }
+        }, {
+          "name" : "environmentId",
+          "in" : "query",
+          "description" : "environment id",
+          "schema" : {
+            "type" : "string",
+            "description" : "environment id"
+          }
+        }, {
+          "name" : "workspaceId",
+          "in" : "query",
+          "description" : "workspace id",
+          "schema" : {
+            "type" : "string",
+            "description" : "workspace id"
+          }
+        }, {
+          "name" : "limit",
+          "in" : "query",
+          "description" : "the number of items to return. Must be in range [1, 100]. Default value - 100",
+          "schema" : {
+            "type" : "integer",
+            "format" : "int32",
+            "description" : "the number of items to return. Must be in range [1, 100]. Default value - 100"
+          }
+        }, {
+          "name" : "offset",
+          "in" : "query",
+          "description" : "the position of the first item. Must be greater than or equal to 0. Default value - 0",
+          "schema" : {
+            "type" : "integer",
+            "format" : "int32",
+            "description" : "the position of the first item. Must be greater than or equal to 0. Default value - 0"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Page"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad Request",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "Unauthorized",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403" : {
+            "description" : "Forbidden",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "Internal Server Error",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "Basic Authentication" : [ ]
+        } ]
+      },
+      "post" : {
+        "tags" : [ "plans :: executables" ],
+        "summary" : "Create Plan",
+        "description" : "Create Plan",
+        "operationId" : "createPlan",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/PlanRequest"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "201" : {
+            "description" : "Created",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Plan"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad Request",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "Unauthorized",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403" : {
+            "description" : "Forbidden",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not Found",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "Internal Server Error",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "Basic Authentication" : [ ]
+        } ]
+      }
+    },
+    "/executables/plans/executions" : {
+      "get" : {
+        "tags" : [ "plans :: executions" ],
+        "summary" : "Get available Plans executions",
+        "description" : "Get available Plans executions",
+        "operationId" : "listAvailablePlansExecutions",
+        "parameters" : [ {
+          "name" : "limit",
+          "in" : "query",
+          "description" : "the number of items to return. Must be in range [1, 100]. Default value - 100",
+          "schema" : {
+            "type" : "integer",
+            "format" : "int32",
+            "description" : "the number of items to return. Must be in range [1, 100]. Default value - 100"
+          }
+        }, {
+          "name" : "offset",
+          "in" : "query",
+          "description" : "the position of the first item. Must be greater than or equal to 0. Default value - 0",
+          "schema" : {
+            "type" : "integer",
+            "format" : "int32",
+            "description" : "the position of the first item. Must be greater than or equal to 0. Default value - 0"
+          }
+        }, {
+          "name" : "status",
+          "in" : "query",
+          "description" : "execution status",
+          "schema" : {
+            "type" : "string",
+            "description" : "execution status",
+            "enum" : [ "executing", "execution_successful", "execution_failed" ]
+          }
+        }, {
+          "name" : "from",
+          "in" : "query",
+          "description" : "from date time (milliseconds)",
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64",
+            "description" : "from date time (milliseconds)"
+          }
+        }, {
+          "name" : "to",
+          "in" : "query",
+          "description" : "to date time (milliseconds)",
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64",
+            "description" : "to date time (milliseconds)"
+          }
+        }, {
+          "name" : "lastDays",
+          "in" : "query",
+          "description" : "lastDays",
+          "schema" : {
+            "type" : "integer",
+            "format" : "int32",
+            "description" : "lastDays"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Page"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad Request",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "Unauthorized",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "Internal Server Error",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "Basic Authentication" : [ ]
+        } ]
+      }
+    },
+    "/executables/plans/{planId}" : {
+      "get" : {
+        "tags" : [ "plans :: executables" ],
+        "summary" : "Get Plan details",
+        "description" : "Get Plan details",
+        "operationId" : "getExecutableDetails",
+        "responses" : {
+          "200" : {
+            "description" : "Successful response",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/PlanExecutabledetails"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad Request",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "Unauthorized",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403" : {
+            "description" : "Forbidden - no permissions to access resource",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not found - resource not found",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "Server error - something went wrong on server side",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "Basic Authentication" : [ ]
+        } ]
+      },
+      "put" : {
+        "tags" : [ "plans :: executables" ],
+        "summary" : "Update plan",
+        "description" : "Update Plan",
+        "operationId" : "updatePlan",
+        "requestBody" : {
+          "content" : {
+            "*/*" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/PlanRequest"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Plan"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad Request",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "Unauthorized",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403" : {
+            "description" : "Forbidden",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not Found",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "Internal Server Error",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "Basic Authentication" : [ ]
+        } ]
+      },
+      "delete" : {
+        "tags" : [ "plans :: executables" ],
+        "summary" : "Delete Plan",
+        "description" : "Delete Plan",
+        "operationId" : "deletePlan",
+        "responses" : {
+          "204" : {
+            "description" : "No Content"
+          },
+          "400" : {
+            "description" : "Bad Request",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "Unauthorized",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403" : {
+            "description" : "Forbidden",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not Found",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "409" : {
+            "description" : "Conflict",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "Internal Server Error",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "Basic Authentication" : [ ]
+        } ]
+      },
+      "parameters" : [ {
+        "name" : "planId",
+        "in" : "path",
+        "required" : true,
+        "description" : "executable ID",
+        "schema" : {
+          "type" : "string",
+          "description" : "executable ID"
+        }
+      } ]
+    },
+    "/executables/plans/{planId}/executions" : {
+      "get" : {
+        "tags" : [ "plans :: executions" ],
+        "summary" : "Get Plan executions",
+        "description" : "Get Plan executions",
+        "operationId" : "listPlanExecutions",
+        "parameters" : [ {
+          "name" : "limit",
+          "in" : "query",
+          "description" : "the number of items to return. Must be in range [1, 100]. Default value - 100",
+          "schema" : {
+            "type" : "integer",
+            "format" : "int32",
+            "description" : "the number of items to return. Must be in range [1, 100]. Default value - 100"
+          }
+        }, {
+          "name" : "offset",
+          "in" : "query",
+          "description" : "the position of the first item. Must be greater than or equal to 0. Default value - 0",
+          "schema" : {
+            "type" : "integer",
+            "format" : "int32",
+            "description" : "the position of the first item. Must be greater than or equal to 0. Default value - 0"
+          }
+        }, {
+          "name" : "status",
+          "in" : "query",
+          "description" : "execution status",
+          "schema" : {
+            "type" : "string",
+            "description" : "execution status",
+            "enum" : [ "executing", "execution_successful", "execution_failed" ]
+          }
+        }, {
+          "name" : "from",
+          "in" : "query",
+          "description" : "from date time (milliseconds)",
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64",
+            "description" : "from date time (milliseconds)"
+          }
+        }, {
+          "name" : "to",
+          "in" : "query",
+          "description" : "to date time (milliseconds)",
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64",
+            "description" : "to date time (milliseconds)"
+          }
+        }, {
+          "name" : "lastDays",
+          "in" : "query",
+          "description" : "lastDays",
+          "schema" : {
+            "type" : "integer",
+            "format" : "int32",
+            "description" : "lastDays"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Page"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad Request",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "Unauthorized",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403" : {
+            "description" : "Forbidden",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not Found",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "Basic Authentication" : [ ]
+        } ]
+      },
+      "parameters" : [ {
+        "name" : "planId",
+        "in" : "path",
+        "required" : true,
+        "description" : "plan ID",
+        "schema" : {
+          "type" : "string",
+          "description" : "plan ID"
+        }
+      } ]
+    },
+    "/executables/plans/{planId}/run-config" : {
+      "get" : {
+        "tags" : [ "plans :: executables" ],
+        "summary" : "Get Plan configuration",
+        "description" : "Get Plan configuration",
+        "operationId" : "getPlanConfiguration",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/RunConfig"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad Request",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "Unauthorized",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403" : {
+            "description" : "Forbidden",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "Internal Server Error",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "Basic Authentication" : [ ]
+        } ]
+      },
+      "put" : {
+        "tags" : [ "plans :: executables" ],
+        "summary" : "Configure Plan execution",
+        "description" : "Configure Plan execution",
+        "operationId" : "configurePlanExecution",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/RunConfig"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/RunConfig"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad Request",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "Unauthorized",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403" : {
+            "description" : "Forbidden",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not Found",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "Internal Server Error",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "Basic Authentication" : [ ]
+        } ]
+      },
+      "delete" : {
+        "tags" : [ "plans :: executables" ],
+        "summary" : "Stop schedule for plan",
+        "description" : "Stop schedule for plan",
+        "operationId" : "stopScheduleForPlan",
+        "responses" : {
+          "204" : {
+            "description" : "No Content"
+          },
+          "400" : {
+            "description" : "Bad Request",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "Unauthorized",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403" : {
+            "description" : "Forbidden",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not Found",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "Internal Server Error",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "Basic Authentication" : [ ]
+        } ]
+      },
+      "parameters" : [ {
+        "name" : "planId",
+        "in" : "path",
+        "required" : true,
+        "description" : "plan id",
+        "schema" : {
+          "type" : "string",
+          "description" : "plan id"
+        }
+      } ]
+    },
+    "/executables/promotions" : {
+      "get" : {
+        "tags" : [ "promotions :: executables" ],
+        "summary" : "Get available Promotions",
+        "description" : "Get available Promotions",
+        "operationId" : "getExecutablesAvailable",
+        "parameters" : [ {
+          "name" : "_s",
+          "in" : "query",
+          "description" : "search query (FIQL format), e.g. \"name==dev to prod*\"",
+          "schema" : {
+            "type" : "string",
+            "description" : "search query (FIQL format), e.g. \"name==dev to prod*\""
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Successful response",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/PromotionExecutableInfo"
+                  }
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad Request",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "Unauthorized",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403" : {
+            "description" : "Forbidden - no permissions to access resource",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not found - resource not found",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "Server error - something went wrong on server side",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "Basic Authentication" : [ ]
+        } ]
+      }
+    },
+    "/executables/promotions/{id}" : {
+      "get" : {
+        "tags" : [ "promotions :: executables" ],
+        "summary" : "Get Promotion details",
+        "description" : "Get Promotion details",
+        "operationId" : "getPromotionDetailsById",
+        "responses" : {
+          "200" : {
+            "description" : "Successful response",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/PromotionExecutabledetails"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad Request",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "Unauthorized",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403" : {
+            "description" : "Forbidden - no permissions to access resource",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not found - resource not found",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "Server error - something went wrong on server side",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "Basic Authentication" : [ ]
+        } ]
+      },
+      "parameters" : [ {
+        "name" : "id",
+        "in" : "path",
+        "required" : true,
+        "description" : "executable ID",
+        "schema" : {
+          "type" : "string",
+          "description" : "executable ID"
+        }
+      } ]
+    },
+    "/executables/tasks" : {
+      "get" : {
+        "tags" : [ "tasks" ],
+        "summary" : "Get available Tasks",
+        "description" : "Get available Tasks",
+        "operationId" : "getAvailableTasks",
+        "parameters" : [ {
+          "name" : "name",
+          "in" : "query",
+          "description" : "task name filter",
+          "schema" : {
+            "type" : "string",
+            "description" : "task name filter"
+          }
+        }, {
+          "name" : "environmentId",
+          "in" : "query",
+          "description" : "environment id",
+          "schema" : {
+            "type" : "string",
+            "description" : "environment id"
+          }
+        }, {
+          "name" : "workspaceId",
+          "in" : "query",
+          "description" : "workspace id",
+          "schema" : {
+            "type" : "string",
+            "description" : "workspace id"
+          }
+        }, {
+          "name" : "limit",
+          "in" : "query",
+          "description" : "the number of items to return. Must be in range [1, 100]. Default value - 100",
+          "schema" : {
+            "type" : "integer",
+            "format" : "int32",
+            "description" : "the number of items to return. Must be in range [1, 100]. Default value - 100"
+          }
+        }, {
+          "name" : "offset",
+          "in" : "query",
+          "description" : "the position of the first item. Must be greater than or equal to 0. Default value - 0",
+          "schema" : {
+            "type" : "integer",
+            "format" : "int32",
+            "description" : "the position of the first item. Must be greater than or equal to 0. Default value - 0"
+          }
+        }, {
+          "name" : "artifactId",
+          "in" : "query",
+          "description" : "artifact id",
+          "schema" : {
+            "type" : "string",
+            "description" : "artifact id"
+          }
+        }, {
+          "name" : "runtimeType",
+          "in" : "query",
+          "description" : "runtime type",
+          "schema" : {
+            "type" : "string",
+            "description" : "runtime type",
+            "enum" : [ "CLOUD", "REMOTE_ENGINE", "REMOTE_ENGINE_CLUSTER", "CLOUD_EXCLUSIVE", "PIPELINE_ENGINE" ]
+          }
+        }, {
+          "name" : "runtimeId",
+          "in" : "query",
+          "description" : "runtime id",
+          "schema" : {
+            "type" : "string",
+            "description" : "runtime id"
+          }
+        }, {
+          "name" : "runtimeRunProfileId",
+          "in" : "query",
+          "description" : "runtime run profile id",
+          "schema" : {
+            "type" : "string",
+            "description" : "runtime run profile id"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Page"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad Request",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "Unauthorized",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403" : {
+            "description" : "Forbidden",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "Internal Server Error",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "Basic Authentication" : [ ]
+        } ]
+      },
+      "post" : {
+        "tags" : [ "tasks" ],
+        "summary" : "Create Task",
+        "description" : "Create Task",
+        "operationId" : "createTask",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/TaskV21CreateRequest"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "201" : {
+            "description" : "Created",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/TaskV21"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad Request",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "Unauthorized",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403" : {
+            "description" : "Forbidden",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "Internal Server Error",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "Basic Authentication" : [ ]
+        } ]
+      }
+    },
+    "/executables/tasks/executions" : {
+      "get" : {
+        "tags" : [ "tasks" ],
+        "summary" : "Get available Tasks Executions",
+        "description" : "Get available Tasks Executions",
+        "operationId" : "listAvailableTaskExecutions",
+        "parameters" : [ {
+          "name" : "limit",
+          "in" : "query",
+          "description" : "the number of items to return. Must be in range [1, 100]. Default value - 100",
+          "schema" : {
+            "type" : "integer",
+            "format" : "int32",
+            "description" : "the number of items to return. Must be in range [1, 100]. Default value - 100"
+          }
+        }, {
+          "name" : "offset",
+          "in" : "query",
+          "description" : "the position of the first item. Must be greater than or equal to 0. Default value - 0",
+          "schema" : {
+            "type" : "integer",
+            "format" : "int32",
+            "description" : "the position of the first item. Must be greater than or equal to 0. Default value - 0"
+          }
+        }, {
+          "name" : "status",
+          "in" : "query",
+          "description" : "execution status",
+          "schema" : {
+            "type" : "string",
+            "description" : "execution status",
+            "enum" : [ "dispatching", "deploy_failed", "executing", "execution_successful", "execution_rejected", "execution_failed", "terminated" ]
+          }
+        }, {
+          "name" : "from",
+          "in" : "query",
+          "description" : "from date time (milliseconds)",
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64",
+            "description" : "from date time (milliseconds)"
+          }
+        }, {
+          "name" : "to",
+          "in" : "query",
+          "description" : "to date time (milliseconds)",
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64",
+            "description" : "to date time (milliseconds)"
+          }
+        }, {
+          "name" : "lastDays",
+          "in" : "query",
+          "description" : "lastDays",
+          "schema" : {
+            "type" : "integer",
+            "format" : "int32",
+            "description" : "lastDays"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Page"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad Request",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "Unauthorized",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "Internal Server Error",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "Basic Authentication" : [ ]
+        } ]
+      }
+    },
+    "/executables/tasks/{taskId}" : {
+      "get" : {
+        "tags" : [ "tasks" ],
+        "summary" : "Get Task by id",
+        "description" : "Get Task by id",
+        "operationId" : "getTask",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/TaskV21"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad Request",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "Unauthorized",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403" : {
+            "description" : "Forbidden",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not Found",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "Internal Server Error",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "Basic Authentication" : [ ]
+        } ]
+      },
+      "put" : {
+        "tags" : [ "tasks" ],
+        "summary" : "Update Task",
+        "description" : "Update Task",
+        "operationId" : "updateTask",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/TaskAutoUpgradeRequest"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/TaskV21"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad Request",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "Unauthorized",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403" : {
+            "description" : "Forbidden",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not Found",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "Internal Server Error",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "Basic Authentication" : [ ]
+        } ]
+      },
+      "delete" : {
+        "tags" : [ "tasks" ],
+        "summary" : "Delete Task",
+        "description" : "Delete Task",
+        "operationId" : "deleteTask",
+        "responses" : {
+          "204" : {
+            "description" : "No Content"
+          },
+          "400" : {
+            "description" : "Bad Request",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "Unauthorized",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403" : {
+            "description" : "Forbidden",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not Found",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "409" : {
+            "description" : "Conflict",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "Internal Server Error",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "Basic Authentication" : [ ]
+        } ]
+      },
+      "parameters" : [ {
+        "name" : "taskId",
+        "in" : "path",
+        "required" : true,
+        "description" : "task id",
+        "schema" : {
+          "type" : "string",
+          "description" : "task id"
+        }
+      } ]
+    },
+    "/executables/tasks/{taskId}/executions" : {
+      "get" : {
+        "tags" : [ "tasks" ],
+        "summary" : "Get Task Executions",
+        "description" : "Get task executions",
+        "operationId" : "listTaskExecutions",
+        "parameters" : [ {
+          "name" : "limit",
+          "in" : "query",
+          "description" : "the number of items to return. Must be in range [1, 100]. Default value - 100",
+          "schema" : {
+            "type" : "integer",
+            "format" : "int32",
+            "description" : "the number of items to return. Must be in range [1, 100]. Default value - 100"
+          }
+        }, {
+          "name" : "offset",
+          "in" : "query",
+          "description" : "the position of the first item. Must be greater than or equal to 0. Default value - 0",
+          "schema" : {
+            "type" : "integer",
+            "format" : "int32",
+            "description" : "the position of the first item. Must be greater than or equal to 0. Default value - 0"
+          }
+        }, {
+          "name" : "status",
+          "in" : "query",
+          "description" : "execution status",
+          "schema" : {
+            "type" : "string",
+            "description" : "execution status",
+            "enum" : [ "dispatching", "deploy_failed", "executing", "execution_successful", "execution_rejected", "execution_failed", "terminated" ]
+          }
+        }, {
+          "name" : "from",
+          "in" : "query",
+          "description" : "from date time (milliseconds)",
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64",
+            "description" : "from date time (milliseconds)"
+          }
+        }, {
+          "name" : "to",
+          "in" : "query",
+          "description" : "to date time (milliseconds)",
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64",
+            "description" : "to date time (milliseconds)"
+          }
+        }, {
+          "name" : "lastDays",
+          "in" : "query",
+          "description" : "lastDays",
+          "schema" : {
+            "type" : "integer",
+            "format" : "int32",
+            "description" : "lastDays"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Page"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad Request",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "Unauthorized",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403" : {
+            "description" : "Forbidden",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not Found",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "Internal Server Error",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "Basic Authentication" : [ ]
+        } ]
+      },
+      "parameters" : [ {
+        "name" : "taskId",
+        "in" : "path",
+        "required" : true,
+        "description" : "task ID",
+        "schema" : {
+          "type" : "string",
+          "description" : "task ID"
+        }
+      } ]
+    },
+    "/executables/tasks/{taskId}/run-config" : {
+      "get" : {
+        "tags" : [ "tasks" ],
+        "summary" : "Get Task configuration",
+        "description" : "Get Task configuration",
+        "operationId" : "getTaskConfiguration",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/TaskRunConfig"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad Request",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "Unauthorized",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403" : {
+            "description" : "Forbidden",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not found",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "Internal Server Error",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "Basic Authentication" : [ ]
+        } ]
+      },
+      "put" : {
+        "tags" : [ "tasks" ],
+        "summary" : "Configure Task execution",
+        "description" : "Configure Task execution",
+        "operationId" : "configureTaskExecution",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/TaskRunConfig"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/TaskRunConfig"
+                }
+              }
+            }
+          },
+          "201" : {
+            "description" : "Created",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/TaskV21"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad Request",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "Unauthorized",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403" : {
+            "description" : "Forbidden",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "Internal Server Error",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "Basic Authentication" : [ ]
+        } ]
+      },
+      "delete" : {
+        "tags" : [ "tasks" ],
+        "summary" : "Stop schedule for Task",
+        "description" : "Stop schedule for task",
+        "operationId" : "stopSchedule",
+        "responses" : {
+          "204" : {
+            "description" : "No Content"
+          },
+          "400" : {
+            "description" : "Bad Request",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "Unauthorized",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403" : {
+            "description" : "Forbidden",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not Found",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "Internal Server Error",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "Basic Authentication" : [ ]
+        } ]
+      },
+      "parameters" : [ {
+        "name" : "taskId",
+        "in" : "path",
+        "required" : true,
+        "description" : "task id",
+        "schema" : {
+          "type" : "string",
+          "description" : "task id"
+        }
+      } ]
+    },
+    "/executions" : {
+      "post" : {
+        "tags" : [ "executions" ],
+        "summary" : "Execute Task",
+        "description" : "Execute Task",
+        "operationId" : "execute",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/Executabletask"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "201" : {
+            "description" : "Execution started",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Executionidentifier"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad Request",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "Unauthorized",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403" : {
+            "description" : "Forbidden - no permissions to access resource",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not found - resource not found",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "Server error - something went wrong on server side",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "501" : {
+            "description" : "Task cannot be deployed because it is not configured",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "Basic Authentication" : [ ]
+        } ]
+      }
+    },
+    "/executions/plans" : {
+      "post" : {
+        "tags" : [ "plans :: executions" ],
+        "summary" : "Execute Plan",
+        "description" : "Execute Plan",
+        "operationId" : "executePlan",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/PlanExecutabletask"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "201" : {
+            "description" : "Execution started",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Executionidentifier"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad Request",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "Unauthorized",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403" : {
+            "description" : "Forbidden - no permissions to access resource",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not found - resource not found",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "Server error - something went wrong on server side",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "501" : {
+            "description" : "Plan cannot be deployed because it is not configured",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "Basic Authentication" : [ ]
+        } ]
+      }
+    },
+    "/executions/plans/{id}" : {
+      "get" : {
+        "tags" : [ "plans :: executions" ],
+        "summary" : "Get Plan execution status",
+        "description" : "Get Plan execution status",
+        "operationId" : "getPlanExecutionStatus",
+        "responses" : {
+          "200" : {
+            "description" : "Successful response",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/PlanExecutionStatus"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad Request",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "Unauthorized",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403" : {
+            "description" : "Forbidden - no permissions to access resource",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not found - resource not found",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "429" : {
+            "description" : "Too many requests",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "Server error - something went wrong on server side",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "Basic Authentication" : [ ]
+        } ]
+      },
+      "parameters" : [ {
+        "name" : "id",
+        "in" : "path",
+        "required" : true,
+        "description" : "execution ID",
+        "schema" : {
+          "type" : "string",
+          "description" : "execution ID"
+        }
+      } ]
+    },
+    "/executions/promotions" : {
+      "post" : {
+        "tags" : [ "promotions :: executions" ],
+        "summary" : "Execute Promotion",
+        "description" : "Execute Promotion",
+        "operationId" : "executePromotion",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/PromotionExecutabletask"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "201" : {
+            "description" : "Execution success",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Executionidentifier"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad Request",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "Unauthorized",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403" : {
+            "description" : "Forbidden - no permissions to access resource",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not found - resource not found",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "Server error - something went wrong on server side",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "501" : {
+            "description" : "Promotions cannot be executed because it is has errors",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "Basic Authentication" : [ ]
+        } ]
+      }
+    },
+    "/executions/promotions/{id}" : {
+      "get" : {
+        "tags" : [ "promotions :: executions" ],
+        "summary" : "Get Promotion execution status",
+        "description" : "Get Promotion execution status",
+        "operationId" : "getExecutionStatus",
+        "responses" : {
+          "200" : {
+            "description" : "Successful response",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/PromotionExecutioninfo"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad Request",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "Unauthorized",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403" : {
+            "description" : "Forbidden - no permissions to access resource",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not found - resource not found",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "Server error - something went wrong on server side",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "Basic Authentication" : [ ]
+        } ]
+      },
+      "parameters" : [ {
+        "name" : "id",
+        "in" : "path",
+        "required" : true,
+        "description" : "execution ID",
+        "schema" : {
+          "type" : "string",
+          "description" : "execution ID"
+        }
+      } ]
+    },
+    "/executions/{id}" : {
+      "get" : {
+        "tags" : [ "executions" ],
+        "summary" : "Get Task execution status",
+        "description" : "Get Task execution status",
+        "operationId" : "getTaskExecutionStatus",
+        "responses" : {
+          "200" : {
+            "description" : "Successful response",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/JobExecutionStatus"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad Request",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "Unauthorized",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403" : {
+            "description" : "Forbidden - no permissions to access resource",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not found - resource not found",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "429" : {
+            "description" : "Too many requests",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "Server error - something went wrong on server side",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "Basic Authentication" : [ ]
+        } ]
+      },
+      "delete" : {
+        "tags" : [ "executions" ],
+        "summary" : "Terminate Task execution",
+        "description" : "Terminate Task execution",
+        "operationId" : "stopExecution",
+        "responses" : {
+          "200" : {
+            "description" : "Execution already finished",
+            "content" : {
+              "text/plain" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            }
+          },
+          "204" : {
+            "description" : "Execution stopped succesfully"
+          },
+          "400" : {
+            "description" : "Bad Request",
+            "content" : {
+              "text/plain" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "Unauthorized",
+            "content" : {
+              "text/plain" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403" : {
+            "description" : "Forbidden - no permissions to access resource",
+            "content" : {
+              "text/plain" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not found - resource not found",
+            "content" : {
+              "text/plain" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "Server error - something went wrong on server side",
+            "content" : {
+              "text/plain" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "Basic Authentication" : [ ]
+        } ]
+      },
+      "parameters" : [ {
+        "name" : "id",
+        "in" : "path",
+        "required" : true,
+        "description" : "execution ID",
+        "schema" : {
+          "type" : "string",
+          "description" : "execution ID"
+        }
+      } ]
+    },
+    "/resources/{id}" : {
+      "get" : {
+        "tags" : [ "configuration" ],
+        "summary" : "Get Resource by id",
+        "description" : "Get Resource by id",
+        "operationId" : "getResource",
+        "responses" : {
+          "200" : {
+            "description" : "Success",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Resource"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad Request",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "Unauthorized",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403" : {
+            "description" : "Forbidden",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not Found",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "Internal Server Error",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "Basic Authentication" : [ ]
+        } ]
+      },
+      "parameters" : [ {
+        "name" : "id",
+        "in" : "path",
+        "required" : true,
+        "description" : "Resource id",
+        "schema" : {
+          "type" : "string",
+          "description" : "Resource id"
+        }
+      } ]
+    },
+    "/runtimes/remote-engine-clusters" : {
+      "get" : {
+        "tags" : [ "runtime :: clusters" ],
+        "summary" : "Get all (available) Remote Engine Clusters",
+        "description" : "Get all (available) Remote Engine Clusters",
+        "operationId" : "getEngineClustersAvailable",
+        "parameters" : [ {
+          "name" : "_s",
+          "in" : "query",
+          "description" : "search query (FIQL format), e.g. \"workspace.environment.id==5cb47ca4b1b5247f6006529e\",\"name==NewCluster\"",
+          "schema" : {
+            "type" : "string",
+            "description" : "search query (FIQL format), e.g. \"workspace.environment.id==5cb47ca4b1b5247f6006529e\",\"name==NewCluster\""
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/BaseEngine"
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "Unauthorized",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403" : {
+            "description" : "Forbidden",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "Internal Server Error",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "Basic Authentication" : [ ]
+        } ]
+      },
+      "post" : {
+        "tags" : [ "runtime :: clusters" ],
+        "summary" : "Create Remote Engine Cluster",
+        "description" : "Create Remote Engine Cluster",
+        "operationId" : "createRemoteEngineCluster",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/ClusterRequest"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "201" : {
+            "description" : "Created",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/EngineCluster"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad Request",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "Unauthorized",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403" : {
+            "description" : "Forbidden",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "Internal Server Error",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "Basic Authentication" : [ ]
+        } ]
+      }
+    },
+    "/runtimes/remote-engine-clusters/{clusterId}" : {
+      "get" : {
+        "tags" : [ "runtime :: clusters" ],
+        "summary" : "Get Remote Engine Cluster by id",
+        "description" : "Get Remote Engine Cluster by id",
+        "operationId" : "getRemoteEngineCluster",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/EngineCluster"
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "Unauthorized",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403" : {
+            "description" : "Forbidden",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not Found",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "Internal Server Error",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "Basic Authentication" : [ ]
+        } ]
+      },
+      "delete" : {
+        "tags" : [ "runtime :: clusters" ],
+        "summary" : "Delete Remote Engine Cluster by id",
+        "description" : "Delete Remote Engine Cluster by id",
+        "operationId" : "deleteRemoteEngineCluster",
+        "responses" : {
+          "204" : {
+            "description" : "No Content"
+          },
+          "400" : {
+            "description" : "Bad Request",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "Unauthorized",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403" : {
+            "description" : "Forbidden",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not Found",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "Internal Server Error",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "Basic Authentication" : [ ]
+        } ]
+      },
+      "parameters" : [ {
+        "name" : "clusterId",
+        "in" : "path",
+        "required" : true,
+        "description" : "remote engine cluster id",
+        "schema" : {
+          "type" : "string",
+          "description" : "remote engine cluster id"
+        }
+      } ]
+    },
+    "/runtimes/remote-engine-clusters/{clusterId}/engines/{engineId}" : {
+      "put" : {
+        "tags" : [ "runtime :: clusters" ],
+        "summary" : "Add Remote Engine to Remote Engine Cluster",
+        "description" : "Add Remote Engine to Remote Engine Cluster",
+        "operationId" : "addRemoteEngineToCluster",
+        "responses" : {
+          "204" : {
+            "description" : "No Content"
+          },
+          "400" : {
+            "description" : "Bad Request",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "Unauthorized",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403" : {
+            "description" : "Forbidden",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not Found",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "409" : {
+            "description" : "Conflict",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "Internal Server Error",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "Basic Authentication" : [ ]
+        } ]
+      },
+      "delete" : {
+        "tags" : [ "runtime :: clusters" ],
+        "summary" : "Remove Remote Engine from Remote Engine Cluster",
+        "description" : "Remove Remote Engine from Remote Engine Cluster",
+        "operationId" : "removeRemoteEngineFromCluster",
+        "responses" : {
+          "204" : {
+            "description" : "No Content"
+          },
+          "400" : {
+            "description" : "Bad Request",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "Unauthorized",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403" : {
+            "description" : "Forbidden",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not Found",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "Internal Server Error",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "Basic Authentication" : [ ]
+        } ]
+      },
+      "parameters" : [ {
+        "name" : "clusterId",
+        "in" : "path",
+        "required" : true,
+        "description" : "remote engine cluster id",
+        "schema" : {
+          "type" : "string",
+          "description" : "remote engine cluster id"
+        }
+      }, {
+        "name" : "engineId",
+        "in" : "path",
+        "required" : true,
+        "description" : "remote engine id",
+        "schema" : {
+          "type" : "string",
+          "description" : "remote engine id"
+        }
+      } ]
+    },
+    "/runtimes/remote-engines" : {
+      "get" : {
+        "tags" : [ "runtime :: engines" ],
+        "summary" : "Get all (available) Remote Engines",
+        "description" : "Get all (available) Remote Engines",
+        "operationId" : "getRemoteEngines",
+        "parameters" : [ {
+          "name" : "query",
+          "in" : "query",
+          "description" : "search query (FIQL format), e.g. \"environmentId==5cb47ca4b1b5247f6006529e\",\"status==PAIRED\"",
+          "schema" : {
+            "type" : "string",
+            "description" : "search query (FIQL format), e.g. \"environmentId==5cb47ca4b1b5247f6006529e\",\"status==PAIRED\""
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Engine"
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "Unauthorized",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403" : {
+            "description" : "Forbidden",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not Found",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "Internal Server Error",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "Basic Authentication" : [ ]
+        } ]
+      },
+      "post" : {
+        "tags" : [ "runtime :: engines" ],
+        "summary" : "Create new Remote Engine",
+        "description" : "Create new Remote Engine",
+        "operationId" : "createRemoteEngine",
+        "requestBody" : {
+          "content" : {
+            "*/*" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/EngineRequest"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "201" : {
+            "description" : "Created",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Engine"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad Request",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "Unauthorized",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403" : {
+            "description" : "Forbidden",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "Internal Server Error",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "Basic Authentication" : [ ]
+        } ]
+      }
+    },
+    "/runtimes/remote-engines/{id}" : {
+      "get" : {
+        "tags" : [ "runtime :: engines" ],
+        "summary" : "Get Remote Engine by id",
+        "description" : "Get Remote Engine by id",
+        "operationId" : "getRemoteEngine",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Engine"
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "Unauthorized",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403" : {
+            "description" : "Forbidden",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not Found",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "Internal Server Error",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "Basic Authentication" : [ ]
+        } ]
+      },
+      "delete" : {
+        "tags" : [ "runtime :: engines" ],
+        "summary" : "Delete Remote Engine by id",
+        "description" : "Delete Remote Engine by id",
+        "operationId" : "deleteRemoteEngine",
+        "responses" : {
+          "204" : {
+            "description" : "No Content"
+          },
+          "400" : {
+            "description" : "Bad Request",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "Unauthorized",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403" : {
+            "description" : "Forbidden",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not Found",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "409" : {
+            "description" : "Conflict",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "Internal Server Error",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "Basic Authentication" : [ ]
+        } ]
+      },
+      "parameters" : [ {
+        "name" : "id",
+        "in" : "path",
+        "required" : true,
+        "description" : "remote engine id",
+        "schema" : {
+          "type" : "string",
+          "description" : "remote engine id"
+        }
+      } ]
+    },
+    "/runtimes/remote-engines/{id}/pairing" : {
+      "delete" : {
+        "tags" : [ "runtime :: engines" ],
+        "summary" : "Unpair Remote Engine",
+        "description" : "Unpair Remote Engine",
+        "operationId" : "unpairRemoteEngine",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "text/plain" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad Request",
+            "content" : {
+              "text/plain" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "Unauthorized",
+            "content" : {
+              "text/plain" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403" : {
+            "description" : "Forbidden",
+            "content" : {
+              "text/plain" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not Found",
+            "content" : {
+              "text/plain" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "Internal Server Error",
+            "content" : {
+              "text/plain" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "Basic Authentication" : [ ]
+        } ]
+      },
+      "parameters" : [ {
+        "name" : "id",
+        "in" : "path",
+        "required" : true,
+        "description" : "remote engine id",
+        "schema" : {
+          "type" : "string",
+          "description" : "remote engine id"
+        }
+      } ]
+    },
+    "/workspaces" : {
+      "get" : {
+        "tags" : [ "workspaces" ],
+        "summary" : "Get available Workspaces",
+        "description" : "Get available Workspaces",
+        "operationId" : "getWorkspaces",
+        "parameters" : [ {
+          "name" : "query",
+          "in" : "query",
+          "description" : "search query (FIQL format), e.g. \"name==TestWorkspace\",\"environment.name==TestEnvironment\"",
+          "schema" : {
+            "type" : "string",
+            "description" : "search query (FIQL format), e.g. \"name==TestWorkspace\",\"environment.name==TestEnvironment\""
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Workspaceinfo"
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "Unauthorized",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403" : {
+            "description" : "Forbidden",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "Internal Server Error",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "Basic Authentication" : [ ]
+        } ]
+      }
+    }
+  },
+  "components" : {
+    "schemas" : {
+      "AdvancedPromotionSpec" : {
+        "type" : "object",
+        "properties" : {
+          "artifactId" : {
+            "type" : "string",
+            "description" : "Advanced Promotion Artifact Id",
+            "example" : "57f64991e4b0b689a64feed0"
+          },
+          "artifactType" : {
+            "type" : "string",
+            "description" : "Advanced Promotion Artifact Type",
+            "enum" : [ "WORKSPACE", "PLAN", "FLOW", "ACTION" ],
+            "example" : "WORKSPACE"
+          }
+        }
+      },
+      "Artifact" : {
+        "type" : "object",
+        "required" : [ "id", "name", "type", "versions", "workspace" ],
+        "properties" : {
+          "id" : {
+            "type" : "string",
+            "description" : "Artifact identifier",
+            "example" : "5cdd2ce2c737973f9d581b99"
+          },
+          "name" : {
+            "type" : "string",
+            "description" : "Artifact name",
+            "example" : "Test Artifact"
+          },
+          "type" : {
+            "type" : "string",
+            "description" : "Artifact type",
+            "enum" : [ "standard", "big_data_streaming", "big_data_batch", "route", "data-service" ],
+            "example" : "standart"
+          },
+          "versions" : {
+            "type" : "array",
+            "description" : "Available artifact versions",
+            "items" : {
+              "type" : "string"
+            },
+            "example" : [ "0.1.0", "0.1.1" ]
+          },
+          "workspace" : {
+            "$ref" : "#/components/schemas/Workspaceinfo"
+          }
+        }
+      },
+      "ArtifactParameter" : {
+        "type" : "object",
+        "required" : [ "name", "required", "type" ],
+        "properties" : {
+          "name" : {
+            "type" : "string",
+            "description" : "Parameter name",
+            "example" : "parameter_url"
+          },
+          "value" : {
+            "type" : "string",
+            "description" : "Parameter value",
+            "example" : "localhost"
+          },
+          "type" : {
+            "type" : "string",
+            "description" : "Parameter value",
+            "example" : "String"
+          },
+          "required" : {
+            "type" : "boolean",
+            "description" : "Is parameter required or not",
+            "example" : false
+          },
+          "comment" : {
+            "type" : "string",
+            "description" : "Comment about parameter",
+            "example" : "parameter for test"
+          }
+        }
+      },
+      "ArtifactRequest" : {
+        "type" : "object",
+        "required" : [ "id", "version" ],
+        "properties" : {
+          "id" : {
+            "type" : "string",
+            "description" : "Id of artifact",
+            "example" : "5c1111d7a4186a4eafed0587"
+          },
+          "version" : {
+            "type" : "string",
+            "description" : "Artifact version",
+            "example" : "0.1.0"
+          }
+        }
+      },
+      "ArtifactVersion" : {
+        "type" : "object",
+        "required" : [ "createDate", "id", "marketplaceProduct", "parameters", "publisher", "type", "version", "workspace" ],
+        "properties" : {
+          "id" : {
+            "type" : "string",
+            "description" : "Id of artifact",
+            "example" : "5c1111d7a4186a4eafed0587"
+          },
+          "name" : {
+            "type" : "string",
+            "description" : "Name of artifact",
+            "example" : "Hello world artifact"
+          },
+          "version" : {
+            "type" : "string",
+            "description" : "Artifact version",
+            "example" : "0.1.0"
+          },
+          "type" : {
+            "type" : "string",
+            "description" : "Artifact type",
+            "enum" : [ "standard", "big_data_streaming", "big_data_batch", "route", "data-service" ],
+            "example" : "standart"
+          },
+          "publisher" : {
+            "type" : "string",
+            "description" : "Artifact publisher",
+            "example" : "admin"
+          },
+          "marketplaceProduct" : {
+            "type" : "string",
+            "description" : "Marketplace product",
+            "example" : "Talend Data Fabric (tp_bd_7.2.1.20190612_1410)"
+          },
+          "parameters" : {
+            "type" : "array",
+            "description" : "Artifact parameters",
+            "items" : {
+              "$ref" : "#/components/schemas/ArtifactParameter"
+            }
+          },
+          "workspace" : {
+            "$ref" : "#/components/schemas/Workspaceinfo"
+          },
+          "description" : {
+            "type" : "string",
+            "description" : "Artifact description",
+            "example" : "This is test artifact"
+          },
+          "createDate" : {
+            "type" : "string",
+            "format" : "date-time",
+            "description" : "Artifact date of creation"
+          }
+        }
+      },
+      "AutoUpgradeInfo" : {
+        "type" : "object",
+        "properties" : {
+          "autoUpgradable" : {
+            "type" : "boolean"
+          },
+          "overrideWithDefaultParameters" : {
+            "type" : "boolean"
+          },
+          "autoUpgradeFailed" : {
+            "type" : "boolean"
+          }
+        }
+      },
+      "BaseArtifactVersion" : {
+        "type" : "object",
+        "required" : [ "id", "version" ],
+        "properties" : {
+          "id" : {
+            "type" : "string",
+            "description" : "Id of artifact",
+            "example" : "5c1111d7a4186a4eafed0587"
+          },
+          "name" : {
+            "type" : "string",
+            "description" : "Name of artifact",
+            "example" : "Hello world artifact"
+          },
+          "version" : {
+            "type" : "string",
+            "description" : "Artifact version",
+            "example" : "0.1.0"
+          }
+        }
+      },
+      "BaseEngine" : {
+        "type" : "object",
+        "required" : [ "createDate", "id", "name", "runtimeId" ],
+        "properties" : {
+          "id" : {
+            "type" : "string",
+            "description" : "Resource id",
+            "example" : "5cdd2ce2c737973f9d581b98"
+          },
+          "name" : {
+            "type" : "string",
+            "description" : "Resource name",
+            "example" : "Remote Engine"
+          },
+          "description" : {
+            "type" : "string",
+            "description" : "Resource description",
+            "example" : "Some description"
+          },
+          "workspace" : {
+            "$ref" : "#/components/schemas/Workspaceinfo"
+          },
+          "createDate" : {
+            "type" : "string",
+            "format" : "date-time",
+            "description" : "Date of creation of the resource"
+          },
+          "updateDate" : {
+            "type" : "string",
+            "format" : "date-time",
+            "description" : "Date of updating of the resource"
+          },
+          "runtimeId" : {
+            "type" : "string",
+            "description" : "Resource runtime id",
+            "example" : "9e8acf72-00d5-451b-9175-97bd44cd6b13"
+          },
+          "availability" : {
+            "type" : "string",
+            "description" : "Availability status of engine|cluster",
+            "enum" : [ "AVAILABLE", "NOT_AVAILABLE", "RETIRED" ],
+            "example" : "NOT_AVAILABLE"
+          }
+        }
+      },
+      "ClusterRequest" : {
+        "type" : "object",
+        "required" : [ "description", "environmentId", "name", "remoteEngines", "workspaceId" ],
+        "properties" : {
+          "name" : {
+            "type" : "string",
+            "description" : "Cluster name",
+            "example" : "Some cluster name"
+          },
+          "workspaceId" : {
+            "type" : "string",
+            "description" : "Workspace identifier",
+            "example" : "5c935c8ba4186a4eafed0592"
+          },
+          "environmentId" : {
+            "type" : "string",
+            "description" : "Environment identifier",
+            "example" : "5c935c8ba4186a4eafed0592"
+          },
+          "description" : {
+            "type" : "string",
+            "description" : "Cluster description",
+            "example" : "some description"
+          },
+          "remoteEngines" : {
+            "type" : "array",
+            "description" : "List of remote engine ids",
+            "items" : {
+              "type" : "string"
+            },
+            "example" : [ "5d3039de65ff7d3583840bc0", "5d3039de65ff7d3583840bk1" ]
+          }
+        }
+      },
+      "DaySchedule" : {
+        "type" : "object",
+        "required" : [ "type" ],
+        "properties" : {
+          "type" : {
+            "type" : "string",
+            "description" : "Type of schedule at days",
+            "enum" : [ "DAY_OF_WEEK", "DAY_OF_MONTH" ],
+            "example" : "DAY_OF_WEEK"
+          },
+          "day" : {
+            "type" : "integer",
+            "format" : "int32",
+            "description" : "Day of month to run task/plan, required only if type of schedule at days is equal to DAY_OF_MONTH",
+            "example" : 3
+          },
+          "days" : {
+            "type" : "array",
+            "description" : "List of days of week to run task/plan, required only if type of schedule at days is equal to DAY_OF_WEEK",
+            "items" : {
+              "type" : "string"
+            },
+            "example" : [ "MONDAY", "WEDNESDAY", "FRIDAY" ]
+          }
+        }
+      },
+      "Engine" : {
+        "type" : "object",
+        "required" : [ "createDate", "environmentId", "id", "name", "runProfiles", "runtimeId", "status" ],
+        "properties" : {
+          "id" : {
+            "type" : "string",
+            "description" : "Resource id",
+            "example" : "5cdd2ce2c737973f9d581b98"
+          },
+          "name" : {
+            "type" : "string",
+            "description" : "Resource name",
+            "example" : "Remote Engine"
+          },
+          "description" : {
+            "type" : "string",
+            "description" : "Resource description",
+            "example" : "Some description"
+          },
+          "workspace" : {
+            "$ref" : "#/components/schemas/Workspaceinfo"
+          },
+          "createDate" : {
+            "type" : "string",
+            "format" : "date-time",
+            "description" : "Date of creation of the resource"
+          },
+          "updateDate" : {
+            "type" : "string",
+            "format" : "date-time",
+            "description" : "Date of updating of the resource"
+          },
+          "runtimeId" : {
+            "type" : "string",
+            "description" : "Resource runtime id",
+            "example" : "9e8acf72-00d5-451b-9175-97bd44cd6b13"
+          },
+          "availability" : {
+            "type" : "string",
+            "description" : "Availability status of engine|cluster",
+            "enum" : [ "AVAILABLE", "NOT_AVAILABLE", "RETIRED" ],
+            "example" : "NOT_AVAILABLE"
+          },
+          "environmentId" : {
+            "type" : "string",
+            "description" : "Id of engine environment",
+            "example" : "5c1111d7a4186a4eafed0587"
+          },
+          "workspaceId" : {
+            "type" : "string",
+            "description" : "Id of engine workspace",
+            "example" : "5c2222d7a4186a4eafed0587"
+          },
+          "status" : {
+            "type" : "string",
+            "description" : "Engine status",
+            "enum" : [ "PAIRED", "NOT_PAIRED" ],
+            "example" : "NOT_PAIRED"
+          },
+          "runProfiles" : {
+            "type" : "array",
+            "description" : "Run profiles of engine",
+            "items" : {
+              "type" : "string"
+            },
+            "example" : [ "MICROSERVICE" ]
+          },
+          "debug" : {
+            "$ref" : "#/components/schemas/EngineDebug"
+          },
+          "clusterId" : {
+            "type" : "string",
+            "description" : "cluster that this engine is part of"
+          },
+          "preAuthorizedKey" : {
+            "type" : "string",
+            "description" : "Preauthorized key (only for not paired engine)",
+            "example" : "123A822BF26DF49045C90D94CD269F3850BFB308B2606019CC63EDADE55B4391"
+          }
+        }
+      },
+      "EngineCluster" : {
+        "type" : "object",
+        "required" : [ "createDate", "id", "name", "runtimeId" ],
+        "properties" : {
+          "id" : {
+            "type" : "string",
+            "description" : "Resource id",
+            "example" : "5cdd2ce2c737973f9d581b98"
+          },
+          "name" : {
+            "type" : "string",
+            "description" : "Resource name",
+            "example" : "Remote Engine"
+          },
+          "description" : {
+            "type" : "string",
+            "description" : "Resource description",
+            "example" : "Some description"
+          },
+          "workspace" : {
+            "$ref" : "#/components/schemas/Workspaceinfo"
+          },
+          "createDate" : {
+            "type" : "string",
+            "format" : "date-time",
+            "description" : "Date of creation of the resource"
+          },
+          "updateDate" : {
+            "type" : "string",
+            "format" : "date-time",
+            "description" : "Date of updating of the resource"
+          },
+          "runtimeId" : {
+            "type" : "string",
+            "description" : "Resource runtime id",
+            "example" : "9e8acf72-00d5-451b-9175-97bd44cd6b13"
+          },
+          "availability" : {
+            "type" : "string",
+            "description" : "Availability status of engine|cluster",
+            "enum" : [ "AVAILABLE", "NOT_AVAILABLE", "RETIRED" ],
+            "example" : "NOT_AVAILABLE"
+          },
+          "engines" : {
+            "type" : "array",
+            "description" : "Engines in cluster",
+            "items" : {
+              "type" : "string"
+            },
+            "example" : [ "5d3039de65ff7d3583840bc0", "5d3039de65ff7d3583840bk1" ]
+          }
+        }
+      },
+      "EngineDebug" : {
+        "type" : "object",
+        "required" : [ "host" ],
+        "properties" : {
+          "host" : {
+            "type" : "string",
+            "description" : "Debug host of engine",
+            "example" : "192.168.0.1"
+          }
+        }
+      },
+      "EngineRequest" : {
+        "type" : "object",
+        "required" : [ "environmentId", "name" ],
+        "properties" : {
+          "name" : {
+            "type" : "string",
+            "description" : "Engine name",
+            "example" : "Remote Engine"
+          },
+          "environmentId" : {
+            "type" : "string",
+            "description" : "Id of engine environment",
+            "example" : "5c1111d7a4186a4eafed0587"
+          },
+          "workspaceId" : {
+            "type" : "string",
+            "description" : "Id of engine workspace",
+            "example" : "5c2222d7a4186a4eafed0587"
+          },
+          "runProfiles" : {
+            "type" : "array",
+            "description" : "Run profiles of engine",
+            "items" : {
+              "type" : "string"
+            },
+            "example" : [ "MICROSERVICE" ]
+          },
+          "debug" : {
+            "$ref" : "#/components/schemas/EngineDebug"
+          },
+          "description" : {
+            "type" : "string",
+            "description" : "Engine|cluster description",
+            "example" : "Some description"
+          }
+        }
+      },
+      "Environmentinfo" : {
+        "type" : "object",
+        "required" : [ "id", "name" ],
+        "properties" : {
+          "id" : {
+            "type" : "string",
+            "description" : "Environment identifier",
+            "example" : "57f64991e4b0b689a64feed3"
+          },
+          "name" : {
+            "type" : "string",
+            "description" : "Environment name",
+            "example" : "Development"
+          },
+          "description" : {
+            "type" : "string",
+            "description" : "Environment description",
+            "example" : "environment detail description"
+          },
+          "default" : {
+            "type" : "boolean",
+            "description" : "Default environment flag"
+          }
+        }
+      },
+      "ErrorResponse" : {
+        "type" : "object",
+        "required" : [ "message", "status" ],
+        "description" : "Error response object",
+        "properties" : {
+          "status" : {
+            "type" : "integer",
+            "format" : "int32",
+            "description" : "Status code"
+          },
+          "message" : {
+            "type" : "string",
+            "description" : "Error message (multilanguage). Info about error for user.",
+            "example" : "something went wrong"
+          },
+          "details" : {
+            "type" : "string",
+            "description" : "Developer message (not translated). Info about error for developer.",
+            "example" : "more descriptive info about something went wrong"
+          },
+          "code" : {
+            "type" : "string",
+            "description" : "Internal error code",
+            "example" : "TIPASS-SCHED-123"
+          },
+          "url" : {
+            "type" : "string",
+            "description" : "URL provided detailed info about error",
+            "example" : "https://error.talend.com/details/tic?code=SCHED-123"
+          },
+          "requestId" : {
+            "type" : "string",
+            "description" : "The unique identification of the request involved with this error",
+            "example" : "16fefb53-035a-4249-af9d-f80a3b47b132"
+          }
+        }
+      },
+      "Executabletask" : {
+        "type" : "object",
+        "required" : [ "executable" ],
+        "properties" : {
+          "executable" : {
+            "type" : "string",
+            "description" : "Executable identifier",
+            "example" : "57f64991e4b0b689a64feed0"
+          },
+          "parameters" : {
+            "type" : "object",
+            "description" : "Executable parameters",
+            "example" : "{parameter_boss=fupton, boss=was}"
+          },
+          "logLevel" : {
+            "type" : "string",
+            "description" : "Execution log level",
+            "enum" : [ "OFF", "ERROR", "WARN", "INFO" ],
+            "example" : "WARN"
+          }
+        }
+      },
+      "ExecutionFlow" : {
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "string"
+          },
+          "name" : {
+            "type" : "string"
+          },
+          "version" : {
+            "type" : "string"
+          },
+          "description" : {
+            "type" : "string"
+          },
+          "destination" : {
+            "type" : "string"
+          },
+          "workspaceId" : {
+            "type" : "string"
+          },
+          "plan" : {
+            "type" : "boolean"
+          },
+          "artifactVersion" : {
+            "$ref" : "#/components/schemas/ArtifactVersion"
+          },
+          "upgradeInfo" : {
+            "$ref" : "#/components/schemas/UpgradeInfo"
+          }
+        }
+      },
+      "ExecutionStep" : {
+        "type" : "object",
+        "properties" : {
+          "stepId" : {
+            "type" : "string"
+          },
+          "stepName" : {
+            "type" : "string"
+          },
+          "status" : {
+            "type" : "string",
+            "enum" : [ "SUCCESS", "PARTIAL_SUCCESS", "FAIL" ]
+          },
+          "stepOnException" : {
+            "$ref" : "#/components/schemas/ExecutionStep"
+          },
+          "nextStep" : {
+            "$ref" : "#/components/schemas/ExecutionStep"
+          },
+          "flows" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/ExecutionFlow"
+            }
+          }
+        }
+      },
+      "Executionidentifier" : {
+        "type" : "object",
+        "required" : [ "executionId" ],
+        "properties" : {
+          "executionId" : {
+            "type" : "string",
+            "description" : "Execution identifier",
+            "example" : "16fefb53-035a-4249-af9d-f80a3b47b132"
+          }
+        }
+      },
+      "JobExecutionStatus" : {
+        "type" : "object",
+        "required" : [ "accountId", "environmentVersion", "executionDestination", "executionId", "executionStatus", "executionType", "jobId", "jobVersion", "startTimestamp", "triggerTimestamp", "userId", "workspaceId" ],
+        "description" : "Execution info",
+        "properties" : {
+          "executionId" : {
+            "type" : "string",
+            "description" : "Job execution ID",
+            "example" : "7b2b122e-d6b8-42de-b0ba-fa2f0d36306e"
+          },
+          "startTimestamp" : {
+            "type" : "string",
+            "format" : "date-time",
+            "description" : "Start time of job execution (UTC)"
+          },
+          "triggerTimestamp" : {
+            "type" : "string",
+            "format" : "date-time",
+            "description" : "Trigger time of job execution (UTC)"
+          },
+          "finishTimestamp" : {
+            "type" : "string",
+            "format" : "date-time",
+            "description" : "End time of job execution (UTC)"
+          },
+          "userId" : {
+            "type" : "string",
+            "description" : "User who triggered or scheduled the execution",
+            "example" : "fupton"
+          },
+          "jobId" : {
+            "type" : "string",
+            "description" : "Job ID",
+            "example" : "57f64991e4b0b689a64feed0"
+          },
+          "jobVersion" : {
+            "type" : "string",
+            "description" : "Job version",
+            "example" : "5.2"
+          },
+          "environmentVersion" : {
+            "type" : "string",
+            "description" : "Execution environment version",
+            "enum" : [ "1.2", "1.3" ],
+            "example" : "1.3"
+          },
+          "executionStatus" : {
+            "type" : "string",
+            "description" : "Execution status",
+            "enum" : [ "EXECUTION_EVENT_RECEIVED", "DISPATCHING_FLOW", "STARTING_FLOW_EXECUTION", "STOPPING_FLOW_EXECUTION", "EXECUTION_TERMINATED", "DEPLOY_FAILED", "EXECUTION_FAILED", "EXECUTION_SUCCESS" ]
+          },
+          "executionType" : {
+            "type" : "string",
+            "description" : "Execution type",
+            "enum" : [ "MANUAL", "SCHEDULED", "WEBHOOK", "PLAN" ],
+            "example" : "SCHEDULED"
+          },
+          "executionDestination" : {
+            "type" : "string",
+            "description" : "Destination of execution",
+            "enum" : [ "CLOUD", "CLOUD_EXCLUSIVE", "REMOTE_ENGINE", "REMOTE_ENGINE_CLUSTER" ],
+            "example" : "REMOTE_ENGINE"
+          },
+          "containerId" : {
+            "type" : "string",
+            "description" : "Container ID"
+          },
+          "runProfileId" : {
+            "type" : "string",
+            "description" : "Run profile ID",
+            "example" : "157f818f-a901-4425-b592-0f9282687784"
+          },
+          "remoteEngineId" : {
+            "type" : "string",
+            "description" : "Remote engine ID",
+            "example" : "157f818f-a901-4425-b592-0f9282687784"
+          },
+          "remoteEngineClusterId" : {
+            "type" : "string",
+            "description" : "Remote engine cluster ID"
+          },
+          "numberOfProcessedRows" : {
+            "type" : "integer",
+            "format" : "int64",
+            "description" : "Number of processed rows",
+            "example" : 1234567890
+          },
+          "numberOfRejectedRows" : {
+            "type" : "integer",
+            "format" : "int64",
+            "description" : "Number of rejected rows",
+            "example" : 0
+          },
+          "accountId" : {
+            "type" : "string",
+            "description" : "Account ID",
+            "example" : "8494b016-b5ef-4b9c-b16d-8b1f824d7616"
+          },
+          "workspaceId" : {
+            "type" : "string",
+            "description" : "Workspace ID",
+            "example" : "57ce63d3e4b0681c36d1a1c4"
+          },
+          "planId" : {
+            "type" : "string",
+            "description" : "Plan execution ID"
+          },
+          "errorType" : {
+            "type" : "string",
+            "description" : "Error type if error occurs"
+          },
+          "errorMessage" : {
+            "type" : "string",
+            "description" : "Error message if error occurs"
+          }
+        }
+      },
+      "Message" : {
+        "type" : "object",
+        "properties" : {
+          "level" : {
+            "type" : "string",
+            "enum" : [ "INFO", "WARN", "ERROR" ]
+          },
+          "info" : {
+            "type" : "string"
+          }
+        }
+      },
+      "Page" : {
+        "type" : "object",
+        "properties" : {
+          "items" : {
+            "type" : "array",
+            "items" : {
+              "type" : "object"
+            }
+          },
+          "limit" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "offset" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "total" : {
+            "type" : "integer",
+            "format" : "int32"
+          }
+        }
+      },
+      "Plan" : {
+        "type" : "object",
+        "required" : [ "author", "createDate", "id", "name", "steps" ],
+        "properties" : {
+          "id" : {
+            "type" : "string",
+            "description" : "Resource id",
+            "example" : "5cdd2ce2c737973f9d581b98"
+          },
+          "name" : {
+            "type" : "string",
+            "description" : "Resource name",
+            "example" : "Remote Engine"
+          },
+          "description" : {
+            "type" : "string",
+            "description" : "Resource description",
+            "example" : "Some description"
+          },
+          "workspace" : {
+            "$ref" : "#/components/schemas/Workspaceinfo"
+          },
+          "createDate" : {
+            "type" : "string",
+            "format" : "date-time",
+            "description" : "Date of creation of the resource"
+          },
+          "updateDate" : {
+            "type" : "string",
+            "format" : "date-time",
+            "description" : "Date of updating of the resource"
+          },
+          "author" : {
+            "type" : "string",
+            "description" : "Plan author",
+            "example" : "operator123"
+          },
+          "steps" : {
+            "type" : "array",
+            "description" : "Plan steps",
+            "items" : {
+              "$ref" : "#/components/schemas/Step"
+            }
+          }
+        }
+      },
+      "PlanExecutabledetails" : {
+        "type" : "object",
+        "required" : [ "executable", "name" ],
+        "properties" : {
+          "executable" : {
+            "type" : "string",
+            "description" : "Executable identifier",
+            "example" : "57f64991e4b0b689a64feed0"
+          },
+          "name" : {
+            "type" : "string",
+            "description" : "Executable name",
+            "example" : "simple executable"
+          },
+          "workspace" : {
+            "$ref" : "#/components/schemas/Workspaceinfo"
+          },
+          "description" : {
+            "type" : "string",
+            "description" : "Executable description",
+            "example" : "plan detail description"
+          },
+          "chart" : {
+            "$ref" : "#/components/schemas/ExecutionStep"
+          },
+          "status" : {
+            "type" : "string",
+            "description" : "Plan execution status",
+            "enum" : [ "executing", "execution_successful", "execution_failed" ]
+          }
+        }
+      },
+      "PlanExecutabletask" : {
+        "type" : "object",
+        "required" : [ "executable" ],
+        "properties" : {
+          "executable" : {
+            "type" : "string",
+            "description" : "Executable identifier",
+            "example" : "b91cf8b2-5dd1-4b18-915b-4c447cee5267"
+          }
+        }
+      },
+      "PlanExecutionStatus" : {
+        "type" : "object",
+        "required" : [ "executionId", "executionStatus", "planId", "startTimestamp", "triggerTimestamp", "userId" ],
+        "description" : "Plan Execution info",
+        "properties" : {
+          "executionId" : {
+            "type" : "string",
+            "description" : "Job execution ID",
+            "example" : "7b2b122e-d6b8-42de-b0ba-fa2f0d36306e"
+          },
+          "startTimestamp" : {
+            "type" : "string",
+            "format" : "date-time",
+            "description" : "Start time of job execution (UTC)"
+          },
+          "triggerTimestamp" : {
+            "type" : "string",
+            "format" : "date-time",
+            "description" : "Trigger time of job execution (UTC)"
+          },
+          "finishTimestamp" : {
+            "type" : "string",
+            "format" : "date-time",
+            "description" : "End time of job execution (UTC)"
+          },
+          "userId" : {
+            "type" : "string",
+            "description" : "User who triggered or scheduled the execution",
+            "example" : "fupton"
+          },
+          "planId" : {
+            "type" : "string",
+            "description" : "Plan ID",
+            "example" : "b91cf8b2-5dd1-4b18-915b-4c447cee5267"
+          },
+          "executionStatus" : {
+            "type" : "string",
+            "description" : "Execution (detailed) status",
+            "enum" : [ "UNDEFINED", "STARTED", "FINISHED", "EXECUTION_FAILED", "EXECUTION_SUCCESS" ],
+            "example" : "FINISHED"
+          },
+          "plannedExecutableCount" : {
+            "type" : "integer",
+            "format" : "int32",
+            "description" : "Number of planned executables",
+            "example" : 2
+          },
+          "doneExecutableCount" : {
+            "type" : "integer",
+            "format" : "int32",
+            "description" : "Number of done executables",
+            "example" : 1
+          },
+          "doneExecutableDetails" : {
+            "type" : "array",
+            "description" : "Exection activity info",
+            "items" : {
+              "$ref" : "#/components/schemas/JobExecutionStatus"
+            }
+          }
+        }
+      },
+      "PlanRequest" : {
+        "type" : "object",
+        "required" : [ "name", "steps", "workspaceId" ],
+        "properties" : {
+          "name" : {
+            "type" : "string",
+            "description" : "Plan name",
+            "example" : "Plan 1"
+          },
+          "workspaceId" : {
+            "type" : "string",
+            "description" : "Plan workspace",
+            "example" : "57f64991e4b0b689a64feed2"
+          },
+          "description" : {
+            "type" : "string",
+            "description" : "Plan description",
+            "example" : "Some description"
+          },
+          "steps" : {
+            "type" : "array",
+            "description" : "Plan steps",
+            "items" : {
+              "$ref" : "#/components/schemas/Step"
+            }
+          }
+        }
+      },
+      "PromotionArtifactExecutioninfo" : {
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "string",
+            "description" : "Artifact Id"
+          },
+          "targetId" : {
+            "type" : "string",
+            "description" : "Target Artifact Id"
+          },
+          "name" : {
+            "type" : "string",
+            "description" : "Artifact Name"
+          },
+          "type" : {
+            "type" : "string",
+            "description" : "Artifact Type",
+            "enum" : [ "WORKSPACE", "PLAN", "FLOW", "ACTION", "CONNECTION", "RESOURCE", "ENGINE", "CLUSTER", "FOLDER" ],
+            "example" : "WORKSPACE"
+          },
+          "analyzeReport" : {
+            "$ref" : "#/components/schemas/Report"
+          },
+          "promotionReport" : {
+            "$ref" : "#/components/schemas/Report"
+          },
+          "usedBy" : {
+            "type" : "array",
+            "description" : "used by Artifacts",
+            "items" : {
+              "$ref" : "#/components/schemas/PromotionExecutioninfo"
+            }
+          }
+        }
+      },
+      "PromotionExecutableInfo" : {
+        "type" : "object",
+        "required" : [ "executable", "name" ],
+        "properties" : {
+          "executable" : {
+            "type" : "string",
+            "description" : "Executable identifier",
+            "example" : "57f64991e4b0b689a64feed0"
+          },
+          "name" : {
+            "type" : "string",
+            "description" : "Executable name",
+            "example" : "simple executable"
+          },
+          "sourceEnvironment" : {
+            "$ref" : "#/components/schemas/Environmentinfo"
+          },
+          "targetEnvironment" : {
+            "$ref" : "#/components/schemas/Environmentinfo"
+          }
+        }
+      },
+      "PromotionExecutabledetails" : {
+        "type" : "object",
+        "required" : [ "executable", "name" ],
+        "properties" : {
+          "executable" : {
+            "type" : "string",
+            "description" : "Executable identifier",
+            "example" : "57f64991e4b0b689a64feed0"
+          },
+          "name" : {
+            "type" : "string",
+            "description" : "Executable name",
+            "example" : "simple executable"
+          },
+          "sourceEnvironment" : {
+            "$ref" : "#/components/schemas/Environmentinfo"
+          },
+          "targetEnvironment" : {
+            "$ref" : "#/components/schemas/Environmentinfo"
+          },
+          "description" : {
+            "type" : "string",
+            "description" : "Executable description",
+            "example" : "promotion detail description"
+          }
+        }
+      },
+      "PromotionExecutabletask" : {
+        "type" : "object",
+        "required" : [ "executable" ],
+        "properties" : {
+          "executable" : {
+            "type" : "string",
+            "description" : "Executable identifier",
+            "example" : "57f64991e4b0b689a64feed0"
+          },
+          "keepTargetResources" : {
+            "type" : "boolean",
+            "description" : "Keep Target Resources flag"
+          },
+          "advanced" : {
+            "$ref" : "#/components/schemas/AdvancedPromotionSpec"
+          }
+        }
+      },
+      "PromotionExecutioninfo" : {
+        "type" : "object",
+        "required" : [ "executionId", "startTimestamp", "triggerTimestamp", "userId" ],
+        "properties" : {
+          "executionId" : {
+            "type" : "string",
+            "description" : "Job execution ID",
+            "example" : "7b2b122e-d6b8-42de-b0ba-fa2f0d36306e"
+          },
+          "startTimestamp" : {
+            "type" : "string",
+            "format" : "date-time",
+            "description" : "Start time of job execution (UTC)"
+          },
+          "triggerTimestamp" : {
+            "type" : "string",
+            "format" : "date-time",
+            "description" : "Trigger time of job execution (UTC)"
+          },
+          "finishTimestamp" : {
+            "type" : "string",
+            "format" : "date-time",
+            "description" : "End time of job execution (UTC)"
+          },
+          "userId" : {
+            "type" : "string",
+            "description" : "User who triggered or scheduled the execution",
+            "example" : "fupton"
+          },
+          "promotionId" : {
+            "type" : "string",
+            "description" : "Promotion Id"
+          },
+          "keepTargetResources" : {
+            "type" : "boolean",
+            "description" : "keep target resources flag"
+          },
+          "advanced" : {
+            "$ref" : "#/components/schemas/AdvancedPromotionSpec"
+          },
+          "defective" : {
+            "type" : "boolean",
+            "description" : "defective promotion flag"
+          },
+          "status" : {
+            "type" : "string",
+            "description" : "execution status",
+            "enum" : [ "ANALIZED", "PROMOTION_STARTED", "PROMOTION_WARNING", "PROMOTION_FAILED", "PROMOTED" ],
+            "example" : "PROMOTED"
+          },
+          "statusMessage" : {
+            "type" : "string",
+            "description" : "Execution status message"
+          },
+          "workspaces" : {
+            "type" : "array",
+            "description" : "Workspace Promotion Execution Info",
+            "items" : {
+              "$ref" : "#/components/schemas/WorkspacePromotionExecutioninfo"
+            }
+          },
+          "engines" : {
+            "type" : "array",
+            "description" : "Remote Engines Promotion Execution Info",
+            "items" : {
+              "$ref" : "#/components/schemas/PromotionArtifactExecutioninfo"
+            }
+          },
+          "clusters" : {
+            "type" : "array",
+            "description" : "Remote Engine Clusters Promotion Execution Info",
+            "items" : {
+              "$ref" : "#/components/schemas/PromotionArtifactExecutioninfo"
+            }
+          },
+          "pipelineId" : {
+            "type" : "string",
+            "description" : "Deprecated! Use Promotion Id instead"
+          }
+        }
+      },
+      "Report" : {
+        "type" : "object",
+        "properties" : {
+          "status" : {
+            "type" : "string",
+            "enum" : [ "CREATED", "REPLACED", "REUSED", "FAILED", "SKIPPED" ]
+          },
+          "messages" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/Message"
+            }
+          }
+        }
+      },
+      "Resource" : {
+        "type" : "object",
+        "required" : [ "file", "id", "name", "workspaceInfo" ],
+        "properties" : {
+          "id" : {
+            "type" : "string",
+            "description" : "Id of resource",
+            "example" : "5c1111d7a4186a4eafed0587"
+          },
+          "name" : {
+            "type" : "string",
+            "description" : "Name of resource",
+            "example" : "Hello world task"
+          },
+          "description" : {
+            "type" : "string",
+            "description" : "Description of resource",
+            "example" : "task detail description"
+          },
+          "workspaceInfo" : {
+            "$ref" : "#/components/schemas/Workspaceinfo"
+          },
+          "file" : {
+            "type" : "boolean",
+            "description" : "Boolean value which indicates that resource is file"
+          }
+        }
+      },
+      "RunConfig" : {
+        "type" : "object",
+        "properties" : {
+          "trigger" : {
+            "$ref" : "#/components/schemas/Trigger"
+          },
+          "runtime" : {
+            "$ref" : "#/components/schemas/Runtime"
+          }
+        }
+      },
+      "RunConnection" : {
+        "type" : "object",
+        "required" : [ "app", "createDate", "id", "name", "parameters", "workspace" ],
+        "properties" : {
+          "id" : {
+            "type" : "string",
+            "description" : "Id of connection",
+            "example" : "5c1111d7a4186a4eafed0587"
+          },
+          "name" : {
+            "type" : "string",
+            "description" : "Name of connection",
+            "example" : "aws"
+          },
+          "description" : {
+            "type" : "string",
+            "description" : "Description of connection",
+            "example" : "AWS connection"
+          },
+          "workspace" : {
+            "$ref" : "#/components/schemas/Workspaceinfo"
+          },
+          "createDate" : {
+            "type" : "string",
+            "format" : "date-time",
+            "description" : "Date of creation of connection"
+          },
+          "updateDate" : {
+            "type" : "string",
+            "format" : "date-time",
+            "description" : "Date of updating of connection"
+          },
+          "app" : {
+            "type" : "string",
+            "description" : "Application of connection"
+          },
+          "parameters" : {
+            "type" : "object",
+            "description" : "Connection parameters",
+            "example" : "{connection_ftp_username=user, connection_ftp_host=localhost}"
+          }
+        }
+      },
+      "Runtime" : {
+        "type" : "object",
+        "properties" : {
+          "type" : {
+            "type" : "string",
+            "description" : "Type of runtime",
+            "enum" : [ "CLOUD", "REMOTE_ENGINE", "REMOTE_ENGINE_CLUSTER", "CLOUD_EXCLUSIVE" ],
+            "example" : "CLOUD"
+          },
+          "id" : {
+            "type" : "string",
+            "description" : "Runtime id",
+            "example" : "5c9a51dc7b353e43c7fc787c"
+          },
+          "engineId" : {
+            "type" : "string",
+            "description" : "Remote engine id",
+            "example" : "5c9a51dc7b353e43c7fc787c"
+          },
+          "clusterId" : {
+            "type" : "string",
+            "description" : "Remote engine cluster id",
+            "example" : "5c9a51dc7b353e43c7fc787c"
+          },
+          "runProfileId" : {
+            "type" : "string",
+            "description" : "Pipeline engine run profile id",
+            "example" : "5c9a51dc7b353e43c7fc783c"
+          }
+        }
+      },
+      "Step" : {
+        "type" : "object",
+        "required" : [ "condition", "name", "taskIds" ],
+        "properties" : {
+          "name" : {
+            "type" : "string",
+            "description" : "Step name",
+            "example" : "Step 1"
+          },
+          "condition" : {
+            "type" : "string",
+            "description" : "Expected status of successful step",
+            "enum" : [ "ALL_SUCCEEDED", "AT_LEAST_ONE_SUCCEEDED" ]
+          },
+          "taskIds" : {
+            "type" : "array",
+            "description" : "List of step tasks",
+            "items" : {
+              "type" : "string"
+            },
+            "example" : [ "5d5fc81f79bc197d2483a100", "5d5fc81f79bc197d2483a101" ]
+          },
+          "handlerOnFailure" : {
+            "$ref" : "#/components/schemas/StepErrorHandler"
+          }
+        }
+      },
+      "StepErrorHandler" : {
+        "type" : "object",
+        "properties" : {
+          "taskIds" : {
+            "type" : "array",
+            "description" : "List of handler tasks",
+            "items" : {
+              "type" : "string"
+            },
+            "example" : [ "5d5fc81f79bc197d2483a102", "5d5fc81f79bc197d2483a103" ]
+          },
+          "planIds" : {
+            "type" : "array",
+            "description" : "List of handler plans",
+            "items" : {
+              "type" : "string"
+            },
+            "example" : [ "5d5fc81f79bc197d2483a104" ]
+          }
+        }
+      },
+      "TaskAutoUpgradeRequest" : {
+        "type" : "object",
+        "required" : [ "artifact", "description", "name", "workspaceId" ],
+        "properties" : {
+          "workspaceId" : {
+            "type" : "string",
+            "description" : "Workspace id of task to create",
+            "example" : "57f64991e4b0b689a64feed2"
+          },
+          "name" : {
+            "type" : "string",
+            "description" : "Task name",
+            "example" : "Hello world task"
+          },
+          "description" : {
+            "type" : "string",
+            "description" : "Task description",
+            "example" : "Task detail description"
+          },
+          "tags" : {
+            "type" : "array",
+            "description" : "Task tags",
+            "items" : {
+              "type" : "string"
+            },
+            "example" : [ "tag1", "tag2" ]
+          },
+          "connections" : {
+            "type" : "object",
+            "description" : "Task connections",
+            "example" : "{aws=5d405e381f40e07fbab6757c, googledrive=5d405e831f40e07fbab6757d}"
+          },
+          "parameters" : {
+            "type" : "object",
+            "description" : "Task parameters",
+            "example" : "{parameter_p1=1111, custom_parameter=custom}"
+          },
+          "resources" : {
+            "type" : "object",
+            "description" : "Task resources",
+            "example" : "{resource_file_f1=5d84adcf38907f16498d5d74}"
+          },
+          "artifact" : {
+            "$ref" : "#/components/schemas/ArtifactRequest"
+          },
+          "autoUpgradeInfo" : {
+            "$ref" : "#/components/schemas/AutoUpgradeInfo"
+          }
+        }
+      },
+      "TaskRunConfig" : {
+        "type" : "object",
+        "properties" : {
+          "trigger" : {
+            "$ref" : "#/components/schemas/Trigger"
+          },
+          "runtime" : {
+            "$ref" : "#/components/schemas/Runtime"
+          },
+          "logLevel" : {
+            "type" : "string",
+            "description" : "Execution log level",
+            "enum" : [ "OFF", "ERROR", "WARN", "INFO" ],
+            "example" : "WARN"
+          }
+        }
+      },
+      "TaskV21" : {
+        "type" : "object",
+        "required" : [ "artifact", "id", "name", "version" ],
+        "properties" : {
+          "id" : {
+            "type" : "string",
+            "description" : "Id of task",
+            "example" : "5c1111d7a4186a4eafed0587"
+          },
+          "name" : {
+            "type" : "string",
+            "description" : "Name of task",
+            "example" : "Hello world task"
+          },
+          "description" : {
+            "type" : "string",
+            "description" : "Task description",
+            "example" : "task detail description"
+          },
+          "workspace" : {
+            "$ref" : "#/components/schemas/Workspaceinfo"
+          },
+          "version" : {
+            "type" : "string",
+            "description" : "Task version",
+            "example" : "0.1"
+          },
+          "artifact" : {
+            "$ref" : "#/components/schemas/BaseArtifactVersion"
+          },
+          "tags" : {
+            "type" : "array",
+            "description" : "Task tags",
+            "items" : {
+              "type" : "string"
+            },
+            "example" : [ "tag1", "tag2" ]
+          },
+          "connections" : {
+            "type" : "object",
+            "description" : "Task connections",
+            "example" : "{aws=5d405e381f40e07fbab6757c, googledrive=5d405e831f40e07fbab6757d}"
+          },
+          "parameters" : {
+            "type" : "object",
+            "description" : "Task parameters",
+            "example" : "{parameter_p1=1111, custom_parameter=custom}"
+          },
+          "resources" : {
+            "type" : "object",
+            "description" : "Task resources",
+            "example" : "{resource_file_f1=5d567ad48f68ae1a1e16e4a4}"
+          },
+          "autoUpgradeInfo" : {
+            "$ref" : "#/components/schemas/AutoUpgradeInfo"
+          }
+        }
+      },
+      "TaskV21CreateRequest" : {
+        "type" : "object",
+        "required" : [ "artifact", "description", "environmentId", "name", "workspaceId" ],
+        "properties" : {
+          "workspaceId" : {
+            "type" : "string",
+            "description" : "Workspace id of task to create",
+            "example" : "57f64991e4b0b689a64feed2"
+          },
+          "name" : {
+            "type" : "string",
+            "description" : "Task name",
+            "example" : "Hello world task"
+          },
+          "description" : {
+            "type" : "string",
+            "description" : "Task description",
+            "example" : "Task detail description"
+          },
+          "tags" : {
+            "type" : "array",
+            "description" : "Task tags",
+            "items" : {
+              "type" : "string"
+            },
+            "example" : [ "tag1", "tag2" ]
+          },
+          "connections" : {
+            "type" : "object",
+            "description" : "Task connections",
+            "example" : "{aws=5d405e381f40e07fbab6757c, googledrive=5d405e831f40e07fbab6757d}"
+          },
+          "parameters" : {
+            "type" : "object",
+            "description" : "Task parameters",
+            "example" : "{parameter_p1=1111, custom_parameter=custom}"
+          },
+          "resources" : {
+            "type" : "object",
+            "description" : "Task resources",
+            "example" : "{resource_file_f1=5d84adcf38907f16498d5d74}"
+          },
+          "artifact" : {
+            "$ref" : "#/components/schemas/ArtifactRequest"
+          },
+          "autoUpgradeInfo" : {
+            "$ref" : "#/components/schemas/AutoUpgradeInfo"
+          },
+          "environmentId" : {
+            "type" : "string",
+            "description" : "Environment id of task to create",
+            "example" : "5d7a3d082d909b386943787e"
+          }
+        }
+      },
+      "TimeSchedule" : {
+        "type" : "object",
+        "required" : [ "type" ],
+        "properties" : {
+          "type" : {
+            "type" : "string",
+            "description" : "Type of schedule at times",
+            "enum" : [ "AT_TIME", "AT_SPECIFIC_TIMES", "AT_INTERVALS" ],
+            "example" : "AT_TIME"
+          },
+          "times" : {
+            "type" : "array",
+            "description" : "Timestamps to run task/plan, required only if type of schedule at times equal to AT_SPECIFIC_TIMES",
+            "items" : {
+              "type" : "string"
+            },
+            "example" : [ "10:00" ]
+          },
+          "time" : {
+            "type" : "string",
+            "description" : "Timestamp to run task/plan, required only if type of schedule at times equal to AT_TIME",
+            "example" : "10:00"
+          },
+          "startTime" : {
+            "type" : "string",
+            "description" : "Interval start timestamp, required only if type of schedule at times equal to AT_INTERVALS",
+            "example" : "10:00"
+          },
+          "endTime" : {
+            "type" : "string",
+            "description" : "Interval end timestamp, required only if type of schedule at times equal to AT_INTERVALS",
+            "example" : "23:00"
+          },
+          "interval" : {
+            "type" : "integer",
+            "format" : "int32",
+            "description" : "Duration of interval in minutes, required only if type of schedule at times equal to AT_INTERVALS",
+            "example" : 10
+          }
+        }
+      },
+      "Trigger" : {
+        "type" : "object",
+        "required" : [ "startDate", "timeZone", "type" ],
+        "properties" : {
+          "type" : {
+            "type" : "string",
+            "description" : "Type of schedule",
+            "enum" : [ "ONCE", "DAILY", "WEEKLY", "MONTHLY", "WEBHOOK", "MANUAL" ],
+            "example" : "ONCE"
+          },
+          "interval" : {
+            "type" : "integer",
+            "format" : "int32",
+            "description" : "Interval between task/plan running in days/weeks/months, required only if type of schedule is not equal to 'ONCE')",
+            "example" : 1
+          },
+          "startDate" : {
+            "type" : "string",
+            "description" : "Date when the task should start to run",
+            "example" : "2019-09-25"
+          },
+          "timeZone" : {
+            "type" : "string",
+            "description" : "Time zone for task schedule",
+            "example" : "Europe/London"
+          },
+          "atTimes" : {
+            "$ref" : "#/components/schemas/TimeSchedule"
+          },
+          "atDays" : {
+            "$ref" : "#/components/schemas/DaySchedule"
+          },
+          "webhook" : {
+            "$ref" : "#/components/schemas/Webhook"
+          }
+        }
+      },
+      "UpgradeInfo" : {
+        "type" : "object",
+        "properties" : {
+          "upgradable" : {
+            "type" : "boolean"
+          },
+          "autoUpgradeFailed" : {
+            "type" : "boolean"
+          }
+        }
+      },
+      "Webhook" : {
+        "type" : "object",
+        "required" : [ "name" ],
+        "properties" : {
+          "name" : {
+            "type" : "string",
+            "description" : "Webhook name",
+            "example" : "NewWebhook"
+          },
+          "description" : {
+            "type" : "string",
+            "description" : "Webhook description",
+            "example" : "Webhook description"
+          },
+          "triggerCalls" : {
+            "type" : "integer",
+            "format" : "int64",
+            "description" : "Endpoint call count to run task|plan ",
+            "example" : 5
+          },
+          "triggerTimeout" : {
+            "type" : "integer",
+            "format" : "int64",
+            "description" : "Time after which the task will starts from the moment the endpoint is first called ",
+            "example" : 30000
+          },
+          "runAsUser" : {
+            "type" : "string",
+            "description" : "The user on behalf of whom the task will be launched",
+            "example" : "admin"
+          },
+          "newUrl" : {
+            "type" : "boolean",
+            "description" : "Indicates whether to generate new url",
+            "example" : true
+          },
+          "url" : {
+            "type" : "string",
+            "description" : "Webhook url"
+          }
+        }
+      },
+      "WorkspacePromotionExecutioninfo" : {
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "string",
+            "description" : "Artifact Id"
+          },
+          "targetId" : {
+            "type" : "string",
+            "description" : "Target Artifact Id"
+          },
+          "name" : {
+            "type" : "string",
+            "description" : "Artifact Name"
+          },
+          "type" : {
+            "type" : "string",
+            "description" : "Artifact Type",
+            "enum" : [ "WORKSPACE", "PLAN", "FLOW", "ACTION", "CONNECTION", "RESOURCE", "ENGINE", "CLUSTER", "FOLDER" ],
+            "example" : "WORKSPACE"
+          },
+          "analyzeReport" : {
+            "$ref" : "#/components/schemas/Report"
+          },
+          "promotionReport" : {
+            "$ref" : "#/components/schemas/Report"
+          },
+          "flows" : {
+            "type" : "array",
+            "description" : "Flows Promotion Execution info",
+            "items" : {
+              "$ref" : "#/components/schemas/PromotionArtifactExecutioninfo"
+            }
+          },
+          "plans" : {
+            "type" : "array",
+            "description" : "Plans Promotion Execution info",
+            "items" : {
+              "$ref" : "#/components/schemas/PromotionArtifactExecutioninfo"
+            }
+          },
+          "actions" : {
+            "type" : "array",
+            "description" : "Actions Promotion Execution info",
+            "items" : {
+              "$ref" : "#/components/schemas/PromotionArtifactExecutioninfo"
+            }
+          },
+          "connections" : {
+            "type" : "array",
+            "description" : "Connections Promotion Execution info",
+            "items" : {
+              "$ref" : "#/components/schemas/PromotionArtifactExecutioninfo"
+            }
+          },
+          "resources" : {
+            "type" : "array",
+            "description" : "Resources Promotion Execution info",
+            "items" : {
+              "$ref" : "#/components/schemas/PromotionArtifactExecutioninfo"
+            }
+          },
+          "engines" : {
+            "type" : "array",
+            "description" : "Engines Promotion Execution info",
+            "items" : {
+              "$ref" : "#/components/schemas/PromotionArtifactExecutioninfo"
+            }
+          },
+          "clusters" : {
+            "type" : "array",
+            "description" : "Clusters Promotion Execution info",
+            "items" : {
+              "$ref" : "#/components/schemas/PromotionArtifactExecutioninfo"
+            }
+          }
+        }
+      },
+      "Workspaceinfo" : {
+        "type" : "object",
+        "required" : [ "id", "name", "type" ],
+        "properties" : {
+          "id" : {
+            "type" : "string",
+            "description" : "Workspace identifier",
+            "example" : "57f64991e4b0b689a64feed2"
+          },
+          "name" : {
+            "type" : "string",
+            "description" : "Workspace name",
+            "example" : "Personal"
+          },
+          "description" : {
+            "type" : "string",
+            "description" : "Workspace description",
+            "example" : "workspace detail description"
+          },
+          "owner" : {
+            "type" : "string",
+            "description" : "Workspace owner",
+            "example" : "admin"
+          },
+          "type" : {
+            "type" : "string",
+            "description" : "Workspace type",
+            "enum" : [ "shared", "personal", "custom" ],
+            "example" : "custom"
+          },
+          "environment" : {
+            "$ref" : "#/components/schemas/Environmentinfo"
+          }
+        }
+      }
+    },
+    "securitySchemes" : {
+      "Basic Authentication" : {
+        "type" : "http",
+        "scheme" : "basic"
+      }
+    }
+  }
+}
